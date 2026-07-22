@@ -2,7 +2,8 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/10 py-12">
+    <footer className="relative mt-10 border-t border-white/10 py-12">
+      <div aria-hidden className="divider-glow absolute inset-x-0 top-0 mx-auto max-w-md" />
       <div className="container-page flex flex-col items-center gap-6 text-center">
         <div className="flex items-center gap-2.5">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-gold to-flame text-lg">

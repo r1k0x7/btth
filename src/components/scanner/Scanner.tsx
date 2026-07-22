@@ -57,8 +57,21 @@ export function Scanner() {
           subtitle="Masukkan nama kultivasimu dan biarkan array spiritual membaca kedalaman Dou Qi, bakat, serta api yang bersemayam di dalam jiwamu."
         />
 
-        <div className="mx-auto mt-12 max-w-2xl">
-          <GlassCard strong glow="rgba(139,92,246,0.35)" className="min-h-[420px]">
+        <div className="relative mx-auto mt-12 max-w-2xl">
+          {/* Soft animated aura behind the card (blurred so it reads as a gentle glow). */}
+          <div
+            aria-hidden
+            className="animate-spin-slower pointer-events-none absolute -inset-8 rounded-[48px] opacity-40 blur-3xl"
+            style={{
+              background:
+                "conic-gradient(from 0deg, rgba(255,215,0,0.35), rgba(139,92,246,0.35), rgba(56,189,248,0.35), rgba(239,68,68,0.3), rgba(255,215,0,0.35))",
+            }}
+          />
+          <GlassCard
+            strong
+            glow="rgba(139,92,246,0.35)"
+            className="relative min-h-[420px]"
+          >
             <AnimatePresence mode="wait">
               {phase === "idle" && (
                 <motion.div
@@ -68,8 +81,16 @@ export function Scanner() {
                   exit={{ opacity: 0, y: -16 }}
                   className="flex flex-col items-center gap-6 py-10"
                 >
-                  <div className="grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br from-gold/20 to-flame/20 text-4xl ring-1 ring-gold/30">
-                    🔮
+                  <div className="relative grid h-24 w-24 place-items-center">
+                    <span className="absolute inset-0 animate-ping rounded-full bg-gold/10" />
+                    <span className="absolute inset-2 rounded-full border border-gold/20" />
+                    <span
+                      className="absolute inset-0 rounded-full border-t border-gold/50"
+                      style={{ animation: "spin-slow 6s linear infinite" }}
+                    />
+                    <div className="grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br from-gold/20 to-flame/20 text-4xl ring-1 ring-gold/30">
+                      🔮
+                    </div>
                   </div>
                   <div className="w-full max-w-md">
                     <label
@@ -86,7 +107,7 @@ export function Scanner() {
                       onChange={(e) => setName(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && startScan()}
                       placeholder="Masukkan nama kultivasimu..."
-                      className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-center text-lg text-white outline-none transition placeholder:text-slate-500 focus:border-gold/60 focus:ring-2 focus:ring-gold/20"
+                      className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-center text-lg text-white outline-none transition placeholder:text-slate-500 focus:border-gold/60 focus:bg-white/[0.07] focus:ring-2 focus:ring-gold/20"
                     />
                   </div>
                   <GlowButton onClick={startScan} className="mt-2">

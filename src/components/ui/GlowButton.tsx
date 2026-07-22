@@ -21,7 +21,7 @@ export function GlowButton({
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 20 }}
       className={cn(
-        "relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] disabled:cursor-not-allowed disabled:opacity-60",
+        "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] disabled:cursor-not-allowed disabled:opacity-60",
         variant === "primary"
           ? "text-void-900"
           : "border border-gold/40 text-gold hover:bg-gold/10",
@@ -39,7 +39,13 @@ export function GlowButton({
       }
       {...rest}
     >
-      {children}
+      {variant === "primary" && (
+        <span
+          aria-hidden
+          className="animate-shine absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/70 to-transparent"
+        />
+      )}
+      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
     </motion.button>
   );
 }
