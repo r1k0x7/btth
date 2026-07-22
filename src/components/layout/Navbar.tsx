@@ -6,10 +6,7 @@ import { cn } from "@/lib/utils";
 
 const LINKS = [
   { href: "/#scanner", label: "Pemindai" },
-  { href: "/#realms", label: "Alam" },
-  { href: "/heavenly-flames", label: "Api Surgawi" },
-  { href: "/#cultivators", label: "Papan Peringkat" },
-  { href: "/#lore", label: "Kisah" },
+  { href: "/#cara-kerja", label: "Cara Kerja" },
 ];
 
 export function Navbar() {

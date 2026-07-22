@@ -17,15 +17,28 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
+const HIGHLIGHTS = [
+  { icon: "⚡", label: "Bakat & Potensi" },
+  { icon: "🎴", label: "Kartu Takdir" },
+  { icon: "🔒", label: "Deterministik" },
+];
+
 export function Hero() {
   return (
-    <section className="relative flex min-h-[92vh] items-center pt-28">
-      <div className="container-page grid items-center gap-12 lg:grid-cols-2">
+    <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-28">
+      {/* Soft ambient glow behind the hero */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-24 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]"
+      />
+
+      <div className="container-page relative grid items-center gap-12 lg:grid-cols-2">
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.p
             variants={item}
             className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-gold"
           >
+            <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-glow shadow-gold/60" />
             斗破苍穹 · Battle Through the Heavens
           </motion.p>
 
@@ -43,36 +56,33 @@ export function Hero() {
             className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300"
           >
             Temukan takdirmu di dunia Battle Through the Heavens. Masukkan
-            namamu, nyalakan array spiritual, dan biarkan api mengungkap alam
-            kultivasi, bakat, serta Api Surgawimu.
+            namamu, nyalakan array spiritual, dan biarkan api mengungkap kedalaman
+            kultivasi serta bakat yang bersemayam dalam jiwamu.
           </motion.p>
 
           <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
             <Link href="#scanner">
               <GlowButton>Pindai Kultivasiku</GlowButton>
             </Link>
-            <Link href="/heavenly-flames">
-              <GlowButton variant="ghost">Jelajahi Api Surgawi</GlowButton>
+            <Link href="#cara-kerja">
+              <GlowButton variant="ghost">Cara Kerja</GlowButton>
             </Link>
           </motion.div>
 
-          <motion.div
+          <motion.ul
             variants={item}
-            className="mt-10 flex flex-wrap gap-8 text-sm text-slate-400"
+            className="mt-10 flex flex-wrap gap-3 text-sm text-slate-300"
           >
-            <div>
-              <div className="font-display text-2xl font-bold text-white">12</div>
-              Alam Kultivasi
-            </div>
-            <div>
-              <div className="font-display text-2xl font-bold text-white">23</div>
-              Api Surgawi
-            </div>
-            <div>
-              <div className="font-display text-2xl font-bold text-white">∞</div>
-              Takdir untuk Ditempa
-            </div>
-          </motion.div>
+            {HIGHLIGHTS.map((h) => (
+              <li
+                key={h.label}
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 backdrop-blur-md"
+              >
+                <span aria-hidden>{h.icon}</span>
+                {h.label}
+              </li>
+            ))}
+          </motion.ul>
         </motion.div>
 
         <motion.div
