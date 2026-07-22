@@ -1,0 +1,216 @@
+"use client";
+
+import { motion, type Variants } from "framer-motion";
+import { useState } from "react";
+import { GlowButton } from "@/components/ui/GlowButton";
+import { formatRealmLevel } from "@/lib/realms";
+import type { ScanResult } from "@/lib/types";
+import { ATTRIBUTE_META, cn } from "@/lib/utils";
+import { HeavenlyFlameCard } from "./HeavenlyFlameCard";
+import { LegendaryFlash } from "./LegendaryFlash";
+import { TalentBar } from "./TalentBar";
+import { XiaoYanBanner } from "./XiaoYanBanner";
+
+const reveal: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, delay: 0.15 + i * 0.12, ease: "easeOut" },
+  }),
+};
+
+function buildReadingText(r: ScanResult): string {
+  const lines = [
+    "⚔️ Dou Qi Realm Scanner — Battle Through the Heavens",
+    `Cultivator: ${r.name}`,
+    `Realm: ${r.realm.name} ${formatRealmLevel(r.realmIndex, r.level)}`.trim(),
+    `Attribute: ${r.attribute} · Soul Realm: ${r.soulRealm}`,
+    `Talent: ${r.talent}/100 · Potential: ${r.potential}`,
+  ];
+  if (r.flames.length) {
+    lines.push(
+      `Heavenly Flame${r.flames.length > 1 ? "s" : ""}: ` +
+        r.flames.map((f) => `${f.name} (Rank #${f.rank}, ${f.rarity})`).join(" + "),
+    );
+  }
+  if (r.isXiaoYanDestiny) lines.push("Title: Destined Successor of Xiao Yan");
+  return lines.join("\n");
+}
+
+export function ResultReveal({
+  result,
+  onScanAgain,
+}: {
+  result: ScanResult;
+  onScanAgain: () => void;
+}) {
+  const [copied, setCopied] = useState(false);
+  const attr = ATTRIBUTE_META[result.attribute];
+  const realmColor = result.realm.color;
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(buildReadingText(result));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <div className="relative">
+      {result.isLegendaryRealm && <LegendaryFlash />}
+
+      <motion.div initial="hidden" animate="show" className="space-y-6">
+        {/* Cultivator + realm */}
+        <motion.div custom={0} variants={reveal} className="text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+            Cultivator
+          </p>
+          <h3 className="mt-1 font-display text-2xl font-bold text-white sm:text-3xl">
+            {result.name}
+          </h3>
+
+          <motion.div
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 16, delay: 0.2 }}
+            className="mx-auto mt-6 grid h-40 w-40 place-items-center rounded-full"
+            style={{
+              border: `2px solid ${realmColor}`,
+              background: `radial-gradient(circle at 50% 35%, ${realmColor}22, rgba(0,0,0,0.3))`,
+              boxShadow: `0 0 60px -10px ${realmColor}`,
+            }}
+          >
+            <div className="text-center">
+              <div
+                className="font-display text-4xl font-black"
+                style={{ color: realmColor, textShadow: `0 0 24px ${realmColor}` }}
+              >
+                {result.realm.cn}
+              </div>
+              <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-slate-400">
+                {result.realm.name}
+              </div>
+            </div>
+          </motion.div>
+
+          {formatRealmLevel(result.realmIndex, result.level) && (
+            <div
+              className="mt-3 text-lg tracking-[3px]"
+              style={{ color: realmColor }}
+            >
+              {formatRealmLevel(result.realmIndex, result.level)}
+            </div>
+          )}
+          <p className="mx-auto mt-2 max-w-md text-sm text-slate-500">
+            {result.realm.blurb}
+          </p>
+        </motion.div>
+
+        {/* Attribute / Soul / Potential */}
+        <motion.div custom={1} variants={reveal} className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <InfoTile
+            label="Dou Qi Attribute"
+            value={`${attr.icon} ${result.attribute}`}
+            color={attr.color}
+          />
+          <InfoTile label="Soul Realm" value={result.soulRealm} color="#38BDF8" />
+          <InfoTile label="Potential" value={result.potential} color="#8B5CF6" />
+        </motion.div>
+
+        {/* Talent */}
+        <motion.div custom={2} variants={reveal} className="rounded-2xl bg-white/[0.03] p-5 ring-1 ring-white/10">
+          <TalentBar talent={result.talent} />
+        </motion.div>
+
+        {/* Fate */}
+        <motion.div
+          custom={3}
+          variants={reveal}
+          className="rounded-2xl border-l-2 border-gold/60 bg-white/[0.03] p-5"
+        >
+          <p className="mb-1 text-xs uppercase tracking-[0.25em] text-gold">
+            Fate Reading
+          </p>
+          <p className="text-sm italic leading-relaxed text-slate-300">
+            {result.fate}
+          </p>
+        </motion.div>
+
+        {/* Xiao Yan destiny */}
+        {result.isXiaoYanDestiny && (
+          <motion.div custom={4} variants={reveal}>
+            <XiaoYanBanner />
+          </motion.div>
+        )}
+
+        {/* Heavenly flames */}
+        <motion.div custom={5} variants={reveal}>
+          {result.flames.length > 0 ? (
+            <div className="space-y-4">
+              <div className="flex items-center justify-center gap-3">
+                <span className="h-px w-10 bg-gold/40" />
+                <p className="text-center text-sm font-semibold uppercase tracking-[0.25em] text-gold">
+                  {result.isDualFlame
+                    ? "Dual Heavenly Flame Fusion"
+                    : "Heavenly Flame Obtained"}
+                </p>
+                <span className="h-px w-10 bg-gold/40" />
+              </div>
+              {result.isDualFlame && (
+                <p className="text-center text-xs text-slate-400">
+                  Your talent is so rare that two strange fires have bonded to your
+                  soul at once — their auras collide in a storm of energy.
+                </p>
+              )}
+              <div className={cn("grid gap-4", result.isDualFlame ? "md:grid-cols-2" : "")}>
+                {result.flames.map((f, i) => (
+                  <HeavenlyFlameCard key={f.rank} flame={f} delay={0.1 + i * 0.15} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 text-center">
+              <p className="text-sm text-slate-400">
+                🔥 No Heavenly Flame answered your call this time — but the strongest
+                fires are seized by those who refuse to give up. Cultivate and scan again.
+              </p>
+            </div>
+          )}
+        </motion.div>
+
+        {/* Actions */}
+        <motion.div custom={6} variants={reveal} className="flex flex-wrap justify-center gap-4 pt-2">
+          <GlowButton onClick={copy} variant="ghost">
+            {copied ? "Copied ✓" : "Copy Reading"}
+          </GlowButton>
+          <GlowButton onClick={onScanAgain}>Scan Again</GlowButton>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+
+function InfoTile({
+  label,
+  value,
+  color,
+}: {
+  label: string;
+  value: string;
+  color: string;
+}) {
+  return (
+    <div className="rounded-2xl bg-white/[0.03] p-4 text-center ring-1 ring-white/10">
+      <div className="font-display text-lg font-bold" style={{ color }}>
+        {value}
+      </div>
+      <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-slate-500">
+        {label}
+      </div>
+    </div>
+  );
+}
