@@ -14,18 +14,15 @@ export function Footer() {
         </div>
         <p className="max-w-xl text-sm leading-relaxed text-slate-500">
           Persembahan penggemar untuk <em>Battle Through the Heavens</em> (斗破苍穹).
-          Alam kultivasi, Api Surgawi, dan kisahnya adalah milik penciptanya, Tian
-          Can Tu Dou. Dibuat untuk kesenangan — tanpa afiliasi atau dukungan resmi.
+          Dunia kultivasi dan kisahnya adalah milik penciptanya, Tian Can Tu Dou.
+          Dibuat untuk kesenangan — tanpa afiliasi atau dukungan resmi.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
           <Link href="/#scanner" className="transition hover:text-gold">
             Pemindai
           </Link>
-          <Link href="/heavenly-flames" className="transition hover:text-gold">
-            Api Surgawi
-          </Link>
-          <Link href="/#lore" className="transition hover:text-gold">
-            Kisah
+          <Link href="/#cara-kerja" className="transition hover:text-gold">
+            Cara Kerja
           </Link>
         </div>
         <p className="text-sm text-slate-400">
