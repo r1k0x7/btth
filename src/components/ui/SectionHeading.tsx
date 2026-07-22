@@ -31,6 +31,11 @@ export function SectionHeading({
       <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
         {title}
       </h2>
+      <div
+        className={
+          "divider-glow mt-5 h-px w-24 " + (align === "center" ? "mx-auto" : "")
+        }
+      />
       {subtitle && (
         <p
           className={

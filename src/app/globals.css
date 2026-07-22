@@ -13,6 +13,8 @@
   }
   body {
     @apply bg-void-900 text-slate-200 antialiased;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     background-image:
       radial-gradient(70% 55% at 50% -10%, rgba(139, 92, 246, 0.16) 0%, transparent 60%),
       radial-gradient(60% 50% at 90% 10%, rgba(56, 189, 248, 0.1) 0%, transparent 55%),
@@ -61,6 +63,18 @@
       #ffffff 50%,
       #ffd700 75%,
       #fff3c4 100%
+    );
+  }
+
+  /* Hairline divider with a soft glowing centre. */
+  .divider-glow {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 215, 0, 0.35),
+      rgba(56, 189, 248, 0.35),
+      transparent
     );
   }
 }
