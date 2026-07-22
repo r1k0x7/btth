@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -19,19 +19,33 @@ export function Scanner() {
   const [result, setResult] = useState<ScanResult | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const startScan = useCallback(() => {
-    if (phase === "scanning") return;
+  const runScan = useCallback((targetName: string) => {
     setPhase("scanning");
     timer.current = setTimeout(() => {
-      setResult(generateScan(name));
+      setResult(generateScan(targetName));
       setPhase("result");
     }, SCAN_MS);
-  }, [name, phase]);
+  }, []);
+
+  const startScan = useCallback(() => {
+    if (phase === "scanning") return;
+    runScan(name);
+  }, [name, phase, runScan]);
 
   const scanAgain = useCallback(() => {
     if (timer.current) clearTimeout(timer.current);
     setResult(null);
     setPhase("idle");
+  }, []);
+
+  // Deep link: `/?name=...` reproduces a shared destiny automatically.
+  useEffect(() => {
+    const shared = new URLSearchParams(window.location.search).get("name");
+    if (!shared) return;
+    const trimmed = shared.slice(0, 28);
+    setName(trimmed);
+    runScan(trimmed);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

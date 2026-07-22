@@ -10,6 +10,7 @@ Built with **Next.js 15 (App Router), TypeScript, Tailwind CSS, and Framer Motio
 - **12 Cultivation Realms** — the official ladder from Dou Zhi Qi to Dou Di.
 - **23 Heavenly Flames** — full encyclopedia at `/heavenly-flames` with search, rarity filter, and sort.
 - **Result system** — realm, attribute, soul realm, animated talent rating, potential, and an epic generated fate reading.
+- **Share & downloadable card** — export your result as a branded PNG "trading card" (rendered on a canvas), share it through the native share sheet (with the image on supported devices), or copy a `?name=` deep link that reproduces the exact same destiny.
 - **Heavenly Flame system** — potential-weighted drop rates, rarity tiers, power levels, and per-scan compatibility.
 - **Legendary moments** — Dual Flame Fusion (talent > 95), the Xiao Yan successor title, and a full-screen burst for Dou Sheng / Dou Di.
 - **Premium atmosphere** — animated particle canvas, aurora glow, light rays, floating embers, mouse parallax, and smooth transitions.
