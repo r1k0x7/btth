@@ -1,13 +1,12 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { useState } from "react";
-import { GlowButton } from "@/components/ui/GlowButton";
 import { formatRealmLevel } from "@/lib/realms";
 import type { ScanResult } from "@/lib/types";
 import { ATTRIBUTE_META, cn } from "@/lib/utils";
 import { HeavenlyFlameCard } from "./HeavenlyFlameCard";
 import { LegendaryFlash } from "./LegendaryFlash";
+import { ShareActions } from "./ShareActions";
 import { TalentBar } from "./TalentBar";
 import { XiaoYanBanner } from "./XiaoYanBanner";
 
@@ -20,24 +19,6 @@ const reveal: Variants = {
   }),
 };
 
-function buildReadingText(r: ScanResult): string {
-  const lines = [
-    "⚔️ Dou Qi Realm Scanner — Battle Through the Heavens",
-    `Cultivator: ${r.name}`,
-    `Realm: ${r.realm.name} ${formatRealmLevel(r.realmIndex, r.level)}`.trim(),
-    `Attribute: ${r.attribute} · Soul Realm: ${r.soulRealm}`,
-    `Talent: ${r.talent}/100 · Potential: ${r.potential}`,
-  ];
-  if (r.flames.length) {
-    lines.push(
-      `Heavenly Flame${r.flames.length > 1 ? "s" : ""}: ` +
-        r.flames.map((f) => `${f.name} (Rank #${f.rank}, ${f.rarity})`).join(" + "),
-    );
-  }
-  if (r.isXiaoYanDestiny) lines.push("Title: Destined Successor of Xiao Yan");
-  return lines.join("\n");
-}
-
 export function ResultReveal({
   result,
   onScanAgain,
@@ -45,19 +26,8 @@ export function ResultReveal({
   result: ScanResult;
   onScanAgain: () => void;
 }) {
-  const [copied, setCopied] = useState(false);
   const attr = ATTRIBUTE_META[result.attribute];
   const realmColor = result.realm.color;
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(buildReadingText(result));
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      setCopied(false);
-    }
-  };
 
   return (
     <div className="relative">
@@ -183,11 +153,8 @@ export function ResultReveal({
         </motion.div>
 
         {/* Actions */}
-        <motion.div custom={6} variants={reveal} className="flex flex-wrap justify-center gap-4 pt-2">
-          <GlowButton onClick={copy} variant="ghost">
-            {copied ? "Copied ✓" : "Copy Reading"}
-          </GlowButton>
-          <GlowButton onClick={onScanAgain}>Scan Again</GlowButton>
+        <motion.div custom={6} variants={reveal}>
+          <ShareActions result={result} onScanAgain={onScanAgain} />
         </motion.div>
       </motion.div>
     </div>
