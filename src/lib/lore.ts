@@ -8,32 +8,32 @@ export interface LoreEntry {
 export const LORE: LoreEntry[] = [
   {
     id: "dou-qi",
-    title: "What is Dou Qi?",
+    title: "Apa itu Dou Qi?",
     icon: "⚡",
-    body: "Dou Qi is the fighting energy cultivated by refining the body and the spirit. Drawn from the world and forged within the meridians, it is the foundation of all power on the continent — the higher your Dou Qi, the closer you stand to reshaping heaven and earth.",
+    body: "Dou Qi adalah energi bertarung yang ditempa dengan memurnikan tubuh dan jiwa. Ditarik dari dunia dan ditempa di dalam meridian, ia adalah fondasi seluruh kekuatan di benua ini — makin tinggi Dou Qi-mu, makin dekat kau untuk membentuk ulang langit dan bumi.",
   },
   {
     id: "cultivation",
-    title: "The Cultivation System",
+    title: "Sistem Kultivasi",
     icon: "🌀",
-    body: "Cultivators climb a ladder of realms from Dou Zhi Qi to the near-mythical Dou Di. Each realm is split into stars or levels, and every breakthrough demands rarer resources, deeper insight, and the will to defy one's limits.",
+    body: "Para kultivator menapaki tangga alam dari Dou Zhi Qi hingga Dou Di yang nyaris mitos. Tiap alam terbagi atas bintang atau tingkat, dan tiap terobosan menuntut sumber daya yang lebih langka, wawasan yang lebih dalam, serta tekad untuk menantang batas diri.",
   },
   {
     id: "heavenly-flames",
-    title: "Heavenly Flames",
+    title: "Api Surgawi",
     icon: "🔥",
-    body: "Strange fires scattered across the world, ranked from the humble Mystic Yellow Flame to the world-ending Emperor Flame. A cultivator who bonds with a Heavenly Flame gains devastating offensive power and unrivalled skill in alchemy.",
+    body: "Api-api aneh yang tersebar di seluruh dunia, diperingkat dari Api Kuning Mistis yang sederhana hingga Api Kaisar yang mampu mengakhiri dunia. Kultivator yang berikatan dengan Api Surgawi memperoleh kekuatan serang dahsyat dan kepiawaian alkimia tanpa tanding.",
   },
   {
     id: "dou-di",
-    title: "The Legend of Dou Di",
+    title: "Legenda Dou Di",
     icon: "👑",
-    body: "The Dou Di is the apex of cultivation — a being who has grasped the profound truths of the Dou Qi Continent. For millennia only a handful have ever ascended, and each of their names became a legend spoken with reverence and fear.",
+    body: "Dou Di adalah puncak kultivasi — sosok yang telah menggenggam kebenaran mendalam Benua Dou Qi. Selama ribuan tahun hanya segelintir yang pernah naik ke sana, dan tiap nama mereka menjadi legenda yang disebut dengan hormat sekaligus takut.",
   },
   {
     id: "world",
-    title: "The World of Battle Through the Heavens",
+    title: "Dunia Battle Through the Heavens",
     icon: "🌌",
-    body: "A vast continent of empires, ancient clans, and beast realms, where strength decides everything. It is a world of alchemy and monsters, of soaring cities and buried ruins — and of a young man named Xiao Yan who rose to touch the heavens.",
+    body: "Benua luas berisi kekaisaran, klan kuno, dan alam para buas, tempat kekuatan menentukan segalanya. Inilah dunia alkimia dan monster, kota menjulang dan reruntuhan terkubur — serta seorang pemuda bernama Xiao Yan yang bangkit hingga menyentuh langit.",
   },
 ];

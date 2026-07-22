@@ -52,9 +52,9 @@ export function Scanner() {
     <section id="scanner" className="relative scroll-mt-24 py-20 sm:py-28">
       <div className="container-page">
         <SectionHeading
-          eyebrow="Cultivation Scanner"
-          title="Scan Your Cultivation"
-          subtitle="Enter your cultivation name and let the spiritual array read the depth of your Dou Qi, your talent, and the flame that dwells within your soul."
+          eyebrow="Pemindai Kultivasi"
+          title="Pindai Kultivasimu"
+          subtitle="Masukkan nama kultivasimu dan biarkan array spiritual membaca kedalaman Dou Qi, bakat, serta api yang bersemayam di dalam jiwamu."
         />
 
         <div className="mx-auto mt-12 max-w-2xl">
@@ -76,7 +76,7 @@ export function Scanner() {
                       htmlFor="cultivator-name"
                       className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400"
                     >
-                      Cultivator Name
+                      Nama Kultivator
                     </label>
                     <input
                       id="cultivator-name"
@@ -85,15 +85,15 @@ export function Scanner() {
                       maxLength={28}
                       onChange={(e) => setName(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && startScan()}
-                      placeholder="Enter your cultivation name..."
+                      placeholder="Masukkan nama kultivasimu..."
                       className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-center text-lg text-white outline-none transition placeholder:text-slate-500 focus:border-gold/60 focus:ring-2 focus:ring-gold/20"
                     />
                   </div>
                   <GlowButton onClick={startScan} className="mt-2">
-                    Scan My Cultivation
+                    Pindai Kultivasiku
                   </GlowButton>
                   <p className="text-xs text-slate-500">
-                    Same name, same destiny — the heavens never lie twice.
+                    Nama yang sama, takdir yang sama — langit tak pernah berdusta dua kali.
                   </p>
                 </motion.div>
               )}

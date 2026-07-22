@@ -12,7 +12,7 @@ export const REALMS: Realm[] = [
     color: "#7CFC9A",
     levelType: "level",
     maxLevel: 10,
-    blurb: "The first breath of Dou Qi stirring within the meridians.",
+    blurb: "Napas pertama Dou Qi yang menggeliat di dalam meridian.",
   },
   {
     id: "dou-zhe",
@@ -21,7 +21,7 @@ export const REALMS: Realm[] = [
     color: "#4DD0E1",
     levelType: "star",
     maxLevel: 9,
-    blurb: "A fighter who has stepped onto the cultivation path.",
+    blurb: "Seorang petarung yang telah melangkah ke jalan kultivasi.",
   },
   {
     id: "dou-shi",
@@ -30,7 +30,7 @@ export const REALMS: Realm[] = [
     color: "#38BDF8",
     levelType: "star",
     maxLevel: 9,
-    blurb: "Dou Qi flows freely; the body begins to leave the ground.",
+    blurb: "Dou Qi mengalir bebas; tubuh mulai meninggalkan tanah.",
   },
   {
     id: "da-dou-shi",
@@ -39,7 +39,7 @@ export const REALMS: Realm[] = [
     color: "#5C8DF6",
     levelType: "star",
     maxLevel: 9,
-    blurb: "A grand master — a pillar among ordinary cultivators.",
+    blurb: "Seorang master agung — pilar di antara para kultivator biasa.",
   },
   {
     id: "dou-ling",
@@ -48,7 +48,7 @@ export const REALMS: Realm[] = [
     color: "#8B5CF6",
     levelType: "star",
     maxLevel: 9,
-    blurb: "Soul perception awakens and energy answers your intent.",
+    blurb: "Persepsi jiwa terbangun dan energi menuruti kehendakmu.",
   },
   {
     id: "dou-wang",
@@ -57,7 +57,7 @@ export const REALMS: Realm[] = [
     color: "#A855F7",
     levelType: "star",
     maxLevel: 9,
-    blurb: "A King of Dou Qi whose name carries weight across a region.",
+    blurb: "Raja Dou Qi yang namanya disegani di seantero wilayah.",
   },
   {
     id: "dou-huang",
@@ -66,7 +66,7 @@ export const REALMS: Realm[] = [
     color: "#EC4899",
     levelType: "star",
     maxLevel: 9,
-    blurb: "Emperor-tier might able to wound the sky and shake the earth.",
+    blurb: "Kekuatan setara kaisar yang mampu melukai langit dan mengguncang bumi.",
   },
   {
     id: "dou-zong",
@@ -75,7 +75,7 @@ export const REALMS: Realm[] = [
     color: "#FB923C",
     levelType: "star",
     maxLevel: 9,
-    blurb: "Dou Qi condenses into wings — true flight becomes yours.",
+    blurb: "Dou Qi memadat menjadi sayap — terbang sejati kini menjadi milikmu.",
   },
   {
     id: "dou-zun",
@@ -84,7 +84,7 @@ export const REALMS: Realm[] = [
     color: "#FBBF24",
     levelType: "star",
     maxLevel: 9,
-    blurb: "A venerate whose gaze bends the space around them.",
+    blurb: "Sang mulia yang tatapannya membengkokkan ruang di sekitarnya.",
   },
   {
     id: "ban-sheng",
@@ -93,7 +93,7 @@ export const REALMS: Realm[] = [
     color: "#FFD700",
     levelType: "none",
     maxLevel: 0,
-    blurb: "Half-Saint — one breath away from sainthood.",
+    blurb: "Setengah Suci — tinggal satu napas menuju kesucian.",
   },
   {
     id: "dou-sheng",
@@ -102,7 +102,7 @@ export const REALMS: Realm[] = [
     color: "#F87171",
     levelType: "star",
     maxLevel: 9,
-    blurb: "A Saint who can seize the heavens and reshape the world.",
+    blurb: "Seorang Suci yang mampu merebut langit dan membentuk ulang dunia.",
   },
   {
     id: "dou-di",
@@ -111,7 +111,7 @@ export const REALMS: Realm[] = [
     color: "#EF4444",
     levelType: "none",
     maxLevel: 0,
-    blurb: "The apex — a god among mortals before whom the heavens bow.",
+    blurb: "Puncak segalanya — dewa di antara manusia yang di hadapannya langit pun tunduk.",
   },
 ];
 
@@ -119,6 +119,6 @@ export const REALMS: Realm[] = [
 export function formatRealmLevel(realmIndex: number, level: number): string {
   const realm = REALMS[realmIndex];
   if (!realm || realm.levelType === "none") return "";
-  if (realm.levelType === "level") return `Level ${level}`;
+  if (realm.levelType === "level") return `Tingkat ${level}`;
   return "★".repeat(level) + "☆".repeat(Math.max(0, realm.maxLevel - level));
 }

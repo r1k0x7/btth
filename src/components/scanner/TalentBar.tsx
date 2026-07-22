@@ -10,7 +10,7 @@ export function TalentBar({ talent }: { talent: number }) {
     <div>
       <div className="mb-2 flex items-baseline justify-between">
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-          Talent Rating
+          Peringkat Bakat
         </span>
         <span className="font-display text-2xl font-bold text-gold tabular-nums">
           {value}

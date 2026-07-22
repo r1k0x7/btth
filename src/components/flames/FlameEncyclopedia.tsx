@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
-import { HEAVENLY_FLAMES, RARITY_COLORS, RARITY_ORDER } from "@/lib/flames";
+import { HEAVENLY_FLAMES, RARITY_COLORS, RARITY_LABELS, RARITY_ORDER } from "@/lib/flames";
 import type { Rarity } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { FlameCard } from "./FlameCard";
@@ -10,9 +10,9 @@ import { FlameCard } from "./FlameCard";
 type SortKey = "rank-asc" | "rank-desc" | "power-desc";
 
 const SORTS: { key: SortKey; label: string }[] = [
-  { key: "rank-asc", label: "Rank ↑" },
-  { key: "rank-desc", label: "Rank ↓" },
-  { key: "power-desc", label: "Power" },
+  { key: "rank-asc", label: "Peringkat ↑" },
+  { key: "rank-desc", label: "Peringkat ↓" },
+  { key: "power-desc", label: "Kekuatan" },
 ];
 
 export function FlameEncyclopedia() {
@@ -46,12 +46,12 @@ export function FlameEncyclopedia() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search Heavenly Flames..."
+          placeholder="Cari Api Surgawi..."
           className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-gold/60 focus:ring-2 focus:ring-gold/20"
         />
         <div className="flex flex-wrap items-center gap-2">
           <FilterChip active={rarity === "All"} onClick={() => setRarity("All")}>
-            All
+            Semua
           </FilterChip>
           {RARITY_ORDER.map((r) => (
             <FilterChip
@@ -60,12 +60,12 @@ export function FlameEncyclopedia() {
               color={RARITY_COLORS[r]}
               onClick={() => setRarity(r)}
             >
-              {r}
+              {RARITY_LABELS[r]}
             </FilterChip>
           ))}
           <div className="ml-auto flex items-center gap-2">
             <span className="text-xs uppercase tracking-[0.16em] text-slate-500">
-              Sort
+              Urutkan
             </span>
             {SORTS.map((s) => (
               <FilterChip
@@ -81,8 +81,8 @@ export function FlameEncyclopedia() {
       </div>
 
       <p className="mb-6 text-sm text-slate-500">
-        Showing <span className="text-white">{flames.length}</span> of{" "}
-        {HEAVENLY_FLAMES.length} Heavenly Flames
+        Menampilkan <span className="text-white">{flames.length}</span> dari{" "}
+        {HEAVENLY_FLAMES.length} Api Surgawi
       </p>
 
       <motion.div layout className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -95,7 +95,7 @@ export function FlameEncyclopedia() {
 
       {flames.length === 0 && (
         <div className="rounded-3xl border border-white/10 bg-white/[0.02] p-12 text-center text-slate-400">
-          No Heavenly Flame matches your search.
+          Tidak ada Api Surgawi yang cocok dengan pencarianmu.
         </div>
       )}
     </div>

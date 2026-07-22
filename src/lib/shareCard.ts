@@ -1,7 +1,12 @@
 import { formatRealmLevel } from "./realms";
-import { RARITY_COLORS } from "./flames";
+import { RARITY_COLORS, RARITY_LABELS } from "./flames";
 import type { ScanResult } from "./types";
-import { ATTRIBUTE_META } from "./utils";
+import {
+  ATTRIBUTE_META,
+  formatNumber,
+  POTENTIAL_LABELS,
+  SOUL_REALM_LABELS,
+} from "./utils";
 
 /**
  * Client-side share helpers for a scan result: a plain-text reading, a
@@ -13,20 +18,20 @@ import { ATTRIBUTE_META } from "./utils";
 export function buildReadingText(r: ScanResult): string {
   const lines = [
     "⚔️ Dou Qi Realm Scanner — Battle Through the Heavens",
-    `Cultivator: ${r.name}`,
-    `Realm: ${r.realm.name} ${formatRealmLevel(r.realmIndex, r.level)}`.trim(),
-    `Attribute: ${r.attribute} · Soul Realm: ${r.soulRealm}`,
-    `Talent: ${r.talent}/100 · Potential: ${r.potential}`,
+    `Kultivator: ${r.name}`,
+    `Alam: ${r.realm.name} ${formatRealmLevel(r.realmIndex, r.level)}`.trim(),
+    `Atribut: ${ATTRIBUTE_META[r.attribute].label} · Alam Jiwa: ${SOUL_REALM_LABELS[r.soulRealm]}`,
+    `Bakat: ${r.talent}/100 · Potensi: ${POTENTIAL_LABELS[r.potential]}`,
   ];
   if (r.flames.length) {
     lines.push(
-      `Heavenly Flame${r.flames.length > 1 ? "s" : ""}: ` +
+      "Api Surgawi: " +
         r.flames
-          .map((f) => `${f.name} (Rank #${f.rank}, ${f.rarity})`)
+          .map((f) => `${f.name} (Peringkat #${f.rank}, ${RARITY_LABELS[f.rarity]})`)
           .join(" + "),
     );
   }
-  if (r.isXiaoYanDestiny) lines.push("Title: Destined Successor of Xiao Yan");
+  if (r.isXiaoYanDestiny) lines.push("Gelar: Penerus Takdir Xiao Yan");
   return lines.join("\n");
 }
 
@@ -203,7 +208,7 @@ export async function renderShareCard(
   // Cultivator name
   ctx.fillStyle = "#8f9bb3";
   ctx.font = `600 26px ${BODY_FONT}`;
-  drawTracked(ctx, "CULTIVATOR", W / 2, y + 26, 8);
+  drawTracked(ctx, "KULTIVATOR", W / 2, y + 26, 8);
   ctx.fillStyle = "#ffffff";
   ctx.font = `900 84px ${DISPLAY_FONT}`;
   const nameText = fitText(ctx, result.name, CONTENT_W, 84, 44, DISPLAY_FONT, "900");
@@ -264,16 +269,16 @@ export async function renderShareCard(
   const tileGap = 24;
   const tileW = (CONTENT_W - tileGap * 2) / 3;
   const tileH = 150;
-  drawTile(ctx, PAD, y, tileW, tileH, "DOU QI ATTRIBUTE", result.attribute, attr.color);
-  drawTile(ctx, PAD + tileW + tileGap, y, tileW, tileH, "SOUL REALM", result.soulRealm, "#38BDF8");
-  drawTile(ctx, PAD + (tileW + tileGap) * 2, y, tileW, tileH, "POTENTIAL", result.potential, "#8B5CF6");
+  drawTile(ctx, PAD, y, tileW, tileH, "ATRIBUT DOU QI", attr.label, attr.color);
+  drawTile(ctx, PAD + tileW + tileGap, y, tileW, tileH, "ALAM JIWA", SOUL_REALM_LABELS[result.soulRealm], "#38BDF8");
+  drawTile(ctx, PAD + (tileW + tileGap) * 2, y, tileW, tileH, "POTENSI", POTENTIAL_LABELS[result.potential], "#8B5CF6");
   y += 150 + GAP;
 
   // Talent bar
   ctx.textAlign = "left";
   ctx.fillStyle = "#8f9bb3";
   ctx.font = `600 24px ${BODY_FONT}`;
-  drawTracked(ctx, "TALENT RATING", PAD, y + 24, 4, "left");
+  drawTracked(ctx, "PERINGKAT BAKAT", PAD, y + 24, 4, "left");
   ctx.textAlign = "right";
   ctx.fillStyle = "#FFD700";
   ctx.font = `800 40px ${DISPLAY_FONT}`;
@@ -307,7 +312,7 @@ export async function renderShareCard(
   ctx.textAlign = "left";
   ctx.fillStyle = "#FFD700";
   ctx.font = `600 24px ${BODY_FONT}`;
-  drawTracked(ctx, "FATE READING", PAD + FATE_PAD, y + FATE_PAD + 20, 4, "left");
+  drawTracked(ctx, "BACAAN TAKDIR", PAD + FATE_PAD, y + FATE_PAD + 20, 4, "left");
   ctx.fillStyle = "#cbd2e6";
   ctx.font = `italic 400 30px ${BODY_FONT}`;
   fateLines.forEach((line, i) => {
@@ -335,7 +340,7 @@ export async function renderShareCard(
     ctx.stroke();
     ctx.fillStyle = "#FFD700";
     ctx.font = `700 34px ${DISPLAY_FONT}`;
-    ctx.fillText("★ Destined Successor of Xiao Yan ★", W / 2, y + 60);
+    ctx.fillText("★ Penerus Takdir Xiao Yan ★", W / 2, y + 60);
     ctx.restore();
     y += 96 + GAP;
   }
@@ -345,10 +350,10 @@ export async function renderShareCard(
   ctx.font = `600 26px ${BODY_FONT}`;
   const flameTitle =
     result.flames.length === 0
-      ? "NO HEAVENLY FLAME"
+      ? "TANPA API SURGAWI"
       : result.isDualFlame
-        ? "DUAL HEAVENLY FLAME FUSION"
-        : "HEAVENLY FLAME OBTAINED";
+        ? "FUSI GANDA API SURGAWI"
+        : "API SURGAWI DIPEROLEH";
   drawTracked(ctx, flameTitle, W / 2, y + 26, 5);
 
   if (result.flames.length === 0) {
@@ -358,7 +363,7 @@ export async function renderShareCard(
     ctx.fillStyle = "#94a3b8";
     ctx.font = `400 26px ${BODY_FONT}`;
     ctx.fillText(
-      "The strongest fires are seized by those who refuse to give up.",
+      "Api terkuat direbut oleh mereka yang pantang menyerah.",
       W / 2,
       y + flameHeader + 48,
     );
@@ -378,7 +383,7 @@ export async function renderShareCard(
   ctx.fillStyle = "#6b7280";
   ctx.font = `500 24px ${BODY_FONT}`;
   ctx.textAlign = "center";
-  ctx.fillText("Same name, same destiny — the heavens never lie twice.", W / 2, y + 40);
+  ctx.fillText("Nama yang sama, takdir yang sama — langit tak pernah berdusta dua kali.", W / 2, y + 40);
 
   return canvas;
 }
@@ -479,7 +484,7 @@ function drawFlamePanel(
   // rarity badge + rank
   ctx.textAlign = "left";
   ctx.fillStyle = `${color}26`;
-  const badge = flame.rarity.toUpperCase();
+  const badge = RARITY_LABELS[flame.rarity].toUpperCase();
   ctx.font = `700 18px ${BODY_FONT}`;
   const bw = ctx.measureText(badge).width + 24 + badge.length * 2;
   roundRect(ctx, x + pad, y + pad, bw, 34, 17);
@@ -489,7 +494,7 @@ function drawFlamePanel(
   ctx.textAlign = "right";
   ctx.fillStyle = "#cbd2e6";
   ctx.font = `700 22px ${DISPLAY_FONT}`;
-  ctx.fillText(`Rank #${flame.rank}`, x + w - pad, y + pad + 24);
+  ctx.fillText(`Peringkat #${flame.rank}`, x + w - pad, y + pad + 24);
 
   // flame name
   ctx.textAlign = "left";
@@ -519,8 +524,8 @@ function drawFlamePanel(
   const statY = y + FLAME_H - 84;
   const statGap = 16;
   const statW = (w - pad * 2 - statGap) / 2;
-  drawStat(ctx, x + pad, statY, statW, "POWER LEVEL", flame.powerLevel.toLocaleString("en-US"), color);
-  drawStat(ctx, x + pad + statW + statGap, statY, statW, "COMPATIBILITY", `${flame.compatibility}%`, color);
+  drawStat(ctx, x + pad, statY, statW, "KEKUATAN", formatNumber(flame.powerLevel), color);
+  drawStat(ctx, x + pad + statW + statGap, statY, statW, "KECOCOKAN", `${flame.compatibility}%`, color);
   ctx.restore();
 }
 

@@ -76,9 +76,9 @@ export function ShareActions({
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      flash("download", "Saved ✓");
+      flash("download", "Tersimpan ✓");
     } catch {
-      flash("download", "Download failed");
+      flash("download", "Gagal mengunduh");
     } finally {
       setBusy(null);
     }
@@ -88,9 +88,9 @@ export function ShareActions({
     const text = `${buildReadingText(result)}\n\n${buildShareUrl(result)}`;
     try {
       await navigator.clipboard.writeText(text);
-      flash("share", "Link copied ✓");
+      flash("share", "Tautan tersalin ✓");
     } catch {
-      flash("share", "Copy failed");
+      flash("share", "Gagal menyalin");
     }
   }, [flash, result]);
 
@@ -116,7 +116,7 @@ export function ShareActions({
           navigator.canShare(withFile)
         ) {
           await navigator.share(withFile);
-          flash("share", "Shared ✓");
+          flash("share", "Dibagikan ✓");
           return;
         }
       } catch {
@@ -125,7 +125,7 @@ export function ShareActions({
 
       if (typeof navigator.share === "function") {
         await navigator.share(shareData);
-        flash("share", "Shared ✓");
+        flash("share", "Dibagikan ✓");
         return;
       }
 
@@ -143,9 +143,9 @@ export function ShareActions({
   const handleCopyReading = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(buildReadingText(result));
-      flash("reading", "Copied ✓");
+      flash("reading", "Tersalin ✓");
     } catch {
-      flash("reading", "Copy failed");
+      flash("reading", "Gagal menyalin");
     }
   }, [flash, result]);
 
@@ -155,18 +155,18 @@ export function ShareActions({
   return (
     <div className="flex flex-wrap justify-center gap-3 pt-2">
       <GlowButton onClick={handleDownload} variant="ghost" disabled={busy !== null}>
-        {busy === "download" ? "Preparing…" : label("download", "Download Image")}
+        {busy === "download" ? "Menyiapkan…" : label("download", "Unduh Gambar")}
       </GlowButton>
       <GlowButton onClick={handleShare} disabled={busy !== null}>
         {busy === "share"
-          ? "Preparing…"
-          : label("share", canNativeShare ? "Share" : "Share Link")}
+          ? "Menyiapkan…"
+          : label("share", canNativeShare ? "Bagikan" : "Bagikan Tautan")}
       </GlowButton>
       <GlowButton onClick={handleCopyReading} variant="ghost">
-        {label("reading", "Copy Reading")}
+        {label("reading", "Salin Bacaan")}
       </GlowButton>
       <GlowButton onClick={onScanAgain} variant="ghost">
-        Scan Again
+        Pindai Lagi
       </GlowButton>
     </div>
   );

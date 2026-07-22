@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { RARITY_COLORS } from "@/lib/flames";
+import { RARITY_COLORS, RARITY_LABELS } from "@/lib/flames";
 import type { FlameReveal } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
 
@@ -61,10 +61,10 @@ export function HeavenlyFlameCard({
             className="rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]"
             style={{ color, background: `${color}1f`, border: `1px solid ${color}55` }}
           >
-            {flame.rarity}
+            {RARITY_LABELS[flame.rarity]}
           </span>
           <span className="font-display text-sm font-bold text-slate-300">
-            Rank #{flame.rank}
+            Peringkat #{flame.rank}
           </span>
         </div>
 
@@ -82,7 +82,7 @@ export function HeavenlyFlameCard({
               {flame.name}
             </h4>
             <p className="text-xs uppercase tracking-[0.2em]" style={{ color }}>
-              Heavenly Flame
+              Api Surgawi
             </p>
           </div>
         </div>
@@ -92,8 +92,8 @@ export function HeavenlyFlameCard({
         </p>
 
         <div className="mt-5 grid grid-cols-2 gap-3">
-          <Stat label="Power Level" value={formatNumber(flame.powerLevel)} color={color} />
-          <Stat label="Compatibility" value={`${flame.compatibility}%`} color={color} />
+          <Stat label="Level Kekuatan" value={formatNumber(flame.powerLevel)} color={color} />
+          <Stat label="Kecocokan" value={`${flame.compatibility}%`} color={color} />
         </div>
       </div>
     </motion.div>

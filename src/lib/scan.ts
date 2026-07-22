@@ -72,41 +72,41 @@ function buildFate(result: {
 }): string {
   const { name, realmName, attribute, potential, hasFlame, soulRealm } = result;
   const elementLine: Record<Attribute, string> = {
-    Fire: "wreathed in flame that answers only to your will",
-    Lightning: "crackling with heaven-splitting lightning",
-    Wind: "borne aloft on winds that no wall can stop",
-    Water: "flowing ever forward like an unyielding tide",
-    Ice: "sheathed in ice that stills the beating of lesser hearts",
-    Wood: "rooted in life that renews faster than it can be cut down",
-    Earth: "grounded in an earth that will not be moved",
-    Light: "haloed in a light that pierces the deepest abyss",
+    Fire: "diselubungi api yang hanya tunduk pada kehendakmu",
+    Lightning: "bergemuruh dengan petir pembelah langit",
+    Wind: "terangkat oleh angin yang tak terhentikan tembok mana pun",
+    Water: "mengalir maju tanpa henti bagai gelombang yang tak kenal menyerah",
+    Ice: "berselubung es yang menghentikan detak jantung mereka yang lebih lemah",
+    Wood: "berakar pada kehidupan yang pulih lebih cepat daripada ia bisa ditebang",
+    Earth: "berpijak pada bumi yang tak tergoyahkan",
+    Light: "bermahkota cahaya yang menembus jurang terdalam",
   };
 
   const potentialLine: Record<Potential, string> = {
     Ordinary:
-      "The road is steep and the heavens indifferent, yet even the humblest spark has toppled empires.",
+      "Jalan ini terjal dan langit tak acuh, namun percikan paling kecil sekalipun pernah menumbangkan kekaisaran.",
     Genius:
-      "Talent runs bright in your veins; masters will fight to call you disciple.",
+      "Bakat bersinar terang di nadimu; para master akan berebut menjadikanmu murid.",
     "Monster Genius":
-      "You are the kind of prodigy the elders whisper about in fear and hope.",
+      "Kau adalah prodigi yang dibisikkan para tetua dengan rasa takut sekaligus harap.",
     "Peak Prodigy":
-      "A once-in-a-generation prodigy — the continent itself seems to lean toward your rise.",
+      "Prodigi sekali dalam satu generasi — benua ini seolah condong menyambut kebangkitanmu.",
     "Future Dou Di":
-      "The heavens have marked you. Where you walk, a new legend of the Dou Di is written.",
+      "Langit telah menandaimu. Ke mana pun kau melangkah, legenda baru Dou Di tertulis.",
   };
 
   const soulLine =
     soulRealm === "Di Realm"
-      ? " Your soul has already touched the Di Realm, a height few reach in ten thousand years."
+      ? " Jiwamu telah menyentuh Alam Di, ketinggian yang jarang dicapai dalam sepuluh ribu tahun."
       : soulRealm === "Heavenly"
-        ? " Your soul perception has climbed into the Heavenly Realm."
+        ? " Persepsi jiwamu telah menanjak hingga Alam Surgawi."
         : "";
 
   const flameLine = hasFlame
-    ? " A Heavenly Flame has chosen you as its vessel — cherish it, for it will carve your name into the flame rankings."
-    : " No Heavenly Flame answers your call yet, but the strongest of all fires can still be seized by those who dare.";
+    ? " Sebuah Api Surgawi telah memilihmu sebagai wadahnya — jagalah baik-baik, sebab ia akan mengukir namamu di peringkat api."
+    : " Belum ada Api Surgawi yang menjawab panggilanmu, tetapi api terkuat sekalipun masih bisa direbut oleh mereka yang berani.";
 
-  return `${name}, a ${realmName} cultivator ${elementLine[attribute]}. ${potentialLine[potential]}${soulLine}${flameLine}`;
+  return `${name}, seorang kultivator ${realmName} yang ${elementLine[attribute]}. ${potentialLine[potential]}${soulLine}${flameLine}`;
 }
 
 /**
@@ -114,7 +114,7 @@ function buildFate(result: {
  * name; an empty name falls back to a fresh random destiny each time.
  */
 export function generateScan(rawName: string): ScanResult {
-  const name = rawName.trim() || "Nameless Cultivator";
+  const name = rawName.trim() || "Kultivator Tanpa Nama";
   const seedSource = rawName.trim().toLowerCase();
   const seed = seedSource ? hashSeed(seedSource) : (Math.random() * 2 ** 32) >>> 0;
   const rng = new Rng(seed);

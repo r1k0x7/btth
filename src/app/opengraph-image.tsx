@@ -42,7 +42,7 @@ export default function OpengraphImage() {
           Dou Qi Realm Scanner
         </div>
         <div style={{ fontSize: 34, marginTop: 18, color: "#94A3B8" }}>
-          Discover your destiny in the world of cultivation.
+          Temukan takdirmu di dunia kultivasi.
         </div>
       </div>
     ),

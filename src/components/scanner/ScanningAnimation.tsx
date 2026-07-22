@@ -7,12 +7,12 @@ const R = 130;
 const CIRC = 2 * Math.PI * R;
 
 const MESSAGES = [
-  "Igniting the spiritual array",
-  "Detecting Dou Qi signature",
-  "Mapping the meridians",
-  "Reading soul perception",
-  "Searching for Heavenly Flames",
-  "Compiling your destiny",
+  "Menyalakan array spiritual",
+  "Mendeteksi tanda Dou Qi",
+  "Memetakan meridian",
+  "Membaca persepsi jiwa",
+  "Mencari Api Surgawi",
+  "Menyusun takdirmu",
 ];
 
 /** Full 3-second spiritual scanning sequence. */

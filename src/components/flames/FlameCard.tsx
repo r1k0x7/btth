@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { RARITY_COLORS } from "@/lib/flames";
+import { RARITY_COLORS, RARITY_LABELS } from "@/lib/flames";
 import type { HeavenlyFlame } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
 
@@ -39,7 +39,7 @@ export function FlameCard({ flame }: { flame: HeavenlyFlame }) {
             className="text-[10px] font-bold uppercase tracking-[0.16em]"
             style={{ color }}
           >
-            {flame.rarity}
+            {RARITY_LABELS[flame.rarity]}
           </span>
         </div>
       </div>
@@ -53,7 +53,7 @@ export function FlameCard({ flame }: { flame: HeavenlyFlame }) {
 
       <div className="relative mt-4 flex items-center justify-between border-t border-white/10 pt-4">
         <span className="text-xs uppercase tracking-[0.16em] text-slate-500">
-          Power
+          Kekuatan
         </span>
         <span className="font-display text-lg font-bold" style={{ color }}>
           {formatNumber(flame.powerLevel)}
