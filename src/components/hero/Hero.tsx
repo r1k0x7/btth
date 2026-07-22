@@ -64,9 +64,6 @@ export function Hero() {
             <Link href="#scanner">
               <GlowButton>Pindai Kultivasiku</GlowButton>
             </Link>
-            <Link href="#cara-kerja">
-              <GlowButton variant="ghost">Cara Kerja</GlowButton>
-            </Link>
           </motion.div>
 
           <motion.ul

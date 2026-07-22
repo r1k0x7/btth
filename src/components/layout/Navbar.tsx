@@ -4,10 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const LINKS = [
-  { href: "/#scanner", label: "Pemindai" },
-  { href: "/#cara-kerja", label: "Cara Kerja" },
-];
+const LINKS = [{ href: "/#scanner", label: "Pemindai" }];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);

@@ -7,7 +7,7 @@ Built with **Next.js 15 (App Router), TypeScript, Tailwind CSS, and Framer Motio
 ## Features
 
 - **Cultivation Scanner** — glassmorphism card with a 3-second rotating energy-ring scan and a spectacular result reveal.
-- **Focused landing page** — a cinematic hero, the scanner, and a "How it works" (Cara Kerja) walkthrough.
+- **Focused landing page** — a cinematic hero and the cultivation scanner, with no distractions.
 - **12 Cultivation Realms** — from Dou Zhi Qi to Dou Di, revealed in your scan result.
 - **23 Heavenly Flames** — full encyclopedia at `/heavenly-flames` with search, rarity filter, and sort.
 - **Result system** — realm, attribute, soul realm, animated talent rating, potential, and an epic generated fate reading.
@@ -57,7 +57,6 @@ src/
 │   ├── hero/             # Hero + floating Heavenly Flame
 │   ├── layout/           # Navbar + Footer
 │   ├── scanner/          # Scanner, scanning animation, result reveal
-│   ├── sections/         # How it works (Cara Kerja)
 │   └── ui/               # Reusable primitives (GlassCard, GlowButton, …)
 ├── hooks/                # useCountUp, useMouseParallax
 └── lib/                  # Domain data + logic (realms, flames, scan, types)

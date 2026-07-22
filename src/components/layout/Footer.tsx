@@ -21,9 +21,6 @@ export function Footer() {
           <Link href="/#scanner" className="transition hover:text-gold">
             Pemindai
           </Link>
-          <Link href="/#cara-kerja" className="transition hover:text-gold">
-            Cara Kerja
-          </Link>
         </div>
         <p className="text-sm text-slate-400">
           Dibuat dengan <span className="text-flame">🔥</span> oleh{" "}
