@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>斗气扫描 · Dou Qi Scanner — Battle Through The Heavens</title>
+<style>
+  :root {
+    --bg-0: #05060f;
+    --bg-1: #0b0a1e;
+    --flame: #ff7a18;
+    --flame-2: #ffcf3f;
+    --ink: #f4f1ff;
+    --muted: #9aa0c4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(1200px 800px at 50% -10%, #1a1240 0%, transparent 60%),
+      radial-gradient(900px 700px at 80% 110%, #3a1030 0%, transparent 55%),
+      linear-gradient(160deg, var(--bg-1), var(--bg-0));
+    min-height: 100%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Drifting embers in the background */
+  .embers { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .ember {
+    position: absolute;
+    bottom: -10px;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--flame-2), var(--flame) 60%, transparent 70%);
+    opacity: 0;
+    animation: rise linear infinite;
+  }
+  @keyframes rise {
+    0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    10%  { opacity: .9; }
+    90%  { opacity: .6; }
+    100% { transform: translateY(-105vh) translateX(var(--drift, 20px)) scale(.3); opacity: 0; }
+  }
+
+  .stage {
+    position: relative;
+    z-index: 1;
+    width: min(92vw, 560px);
+    padding: 40px 26px;
+    text-align: center;
+  }
+
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn .5s ease both; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity:1; transform:none; } }
+
+  .title {
+    font-size: clamp(28px, 7vw, 44px);
+    letter-spacing: .18em;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--flame-2), var(--flame));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 0 30px rgba(255,122,24,.25);
+  }
+  .subtitle { color: var(--muted); margin-top: 10px; letter-spacing: .25em; font-size: 13px; text-transform: uppercase; }
+  .lede { color: var(--muted); margin: 22px auto 30px; max-width: 40ch; line-height: 1.6; font-size: 15px; }
+
+  .btn {
+    appearance: none; border: 0; cursor: pointer;
+    font: inherit; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: #1a0c00;
+    padding: 15px 34px; border-radius: 999px;
+    background: linear-gradient(120deg, var(--flame-2), var(--flame));
+    box-shadow: 0 10px 30px rgba(255,122,24,.35), inset 0 0 12px rgba(255,255,255,.4);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(255,122,24,.5), inset 0 0 12px rgba(255,255,255,.5); }
+  .btn:active { transform: translateY(0); }
+  .btn.ghost {
+    color: var(--flame-2); background: transparent;
+    border: 1px solid rgba(255,207,63,.5);
+    box-shadow: none;
+  }
+  .btn.ghost:hover { background: rgba(255,207,63,.08); box-shadow: 0 0 24px rgba(255,207,63,.2); }
+
+  /* ---------- Scanner ---------- */
+  .scanner { position: relative; width: 320px; height: 320px; margin: 10px auto 26px; }
+
+  .ring {
+    position: absolute; inset: 0; margin: auto;
+    border-radius: 50%;
+    border: 2px solid transparent;
+  }
+  .ring.r1 {
+    width: 320px; height: 320px;
+    border-top-color: var(--flame-2);
+    border-right-color: rgba(255,207,63,.25);
+    box-shadow: 0 0 40px rgba(255,207,63,.25), inset 0 0 30px rgba(255,207,63,.1);
+    animation: spin 3.2s linear infinite;
+  }
+  .ring.r2 {
+    width: 244px; height: 244px;
+    border-bottom-color: var(--flame);
+    border-left-color: rgba(255,122,24,.3);
+    box-shadow: 0 0 30px rgba(255,122,24,.3);
+    animation: spin 2.4s linear infinite reverse;
+  }
+  .ring.r3 {
+    width: 172px; height: 172px;
+    border-top-color: #ff4d6d;
+    border-left-color: rgba(255,77,109,.3);
+    box-shadow: 0 0 26px rgba(255,77,109,.35);
+    animation: spin 1.7s linear infinite;
+  }
+  .ring.dashed {
+    width: 290px; height: 290px;
+    border: 2px dashed rgba(255,207,63,.35);
+    animation: spin 12s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* SVG progress ring */
+  .progress-ring { position: absolute; inset: 0; margin: auto; width: 320px; height: 320px; transform: rotate(-90deg); }
+  .progress-ring circle { fill: none; stroke-width: 4; stroke-linecap: round; }
+  .progress-ring .track { stroke: rgba(255,255,255,.06); }
+  .progress-ring .bar {
+    stroke: url(#grad);
+    stroke-dasharray: 942;
+    stroke-dashoffset: 942;
+    filter: drop-shadow(0 0 6px rgba(255,160,40,.7));
+    transition: stroke-dashoffset .2s linear;
+  }
+
+  .core {
+    position: absolute; inset: 0; margin: auto;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, #fff 0%, var(--flame-2) 30%, var(--flame) 60%, #8a1500 100%);
+    box-shadow: 0 0 60px rgba(255,122,24,.7), 0 0 120px rgba(255,77,20,.4);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); filter: brightness(1); }
+    50%     { transform: scale(1.08); filter: brightness(1.25); }
+  }
+
+  .pct {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: 30px; font-weight: 800; color: #2a0d00;
+    text-shadow: 0 1px 0 rgba(255,255,255,.4);
+  }
+
+  .status { color: var(--flame-2); letter-spacing: .18em; font-size: 13px; text-transform: uppercase; min-height: 1.2em; }
+  .status .dots::after { content: ""; animation: dots 1.2s steps(4,end) infinite; }
+  @keyframes dots { 0%{content:"";} 25%{content:".";} 50%{content:"..";} 75%{content:"...";} }
+
+  /* ---------- Result ---------- */
+  .badge {
+    position: relative;
+    width: 260px; height: 260px; margin: 0 auto 8px;
+    display: grid; place-items: center;
+  }
+  .badge .halo {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle, var(--tier, var(--flame)) 0%, transparent 62%);
+    opacity: .35; filter: blur(6px);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .badge .disc {
+    width: 200px; height: 200px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: radial-gradient(circle at 50% 35%, rgba(255,255,255,.12), rgba(0,0,0,.35));
+    border: 2px solid var(--tier, var(--flame));
+    box-shadow: 0 0 50px -6px var(--tier, var(--flame)), inset 0 0 40px rgba(255,255,255,.06);
+  }
+  .tier-cn { font-size: 46px; font-weight: 900; color: var(--tier, var(--flame)); text-shadow: 0 0 24px var(--tier, var(--flame)); }
+  .tier-en { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+  .stars { margin: 14px 0 4px; font-size: 20px; letter-spacing: 4px; color: var(--flame-2); }
+  .power { color: var(--muted); font-size: 14px; letter-spacing: .1em; }
+  .power b { color: var(--ink); font-size: 20px; letter-spacing: 0; }
+  .flavor { color: var(--muted); max-width: 38ch; margin: 16px auto 26px; line-height: 1.6; font-style: italic; font-size: 14px; }
+
+  .reveal-pop { animation: pop .6s cubic-bezier(.2,.9,.3,1.4) both; }
+  @keyframes pop { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+
+  .footer { position: fixed; bottom: 14px; left: 0; right: 0; text-align: center; color: rgba(154,160,196,.5); font-size: 11px; letter-spacing: .1em; z-index: 1; }
+</style>
+</head>
+<body>
+  <div class="embers" id="embers" aria-hidden="true"></div>
+
+  <main class="stage">
+    <!-- IDLE -->
+    <section class="screen active" id="screen-idle">
+      <h1 class="title">斗气扫描</h1>
+      <p class="subtitle">Dou Qi Scanner</p>
+      <p class="lede">Place your palm on the array and let the flame read your cultivation. The heavens will reveal how far your Dou Qi has risen.</p>
+      <button class="btn" id="startBtn">Begin Scan</button>
+    </section>
+
+    <!-- SCANNING -->
+    <section class="screen" id="screen-scan">
+      <div class="scanner">
+        <svg class="progress-ring" viewBox="0 0 320 320" aria-hidden="true">
+          <defs>
+            <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffcf3f"/>
+              <stop offset="60%" stop-color="#ff7a18"/>
+              <stop offset="100%" stop-color="#ff4d6d"/>
+            </linearGradient>
+          </defs>
+          <circle class="track" cx="160" cy="160" r="150"></circle>
+          <circle class="bar" id="progressBar" cx="160" cy="160" r="150"></circle>
+        </svg>
+        <div class="ring dashed"></div>
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <div class="core"></div>
+        <div class="pct" id="pct">0%</div>
+      </div>
+      <p class="status" id="status">Igniting the array<span class="dots"></span></p>
+    </section>
+
+    <!-- RESULT -->
+    <section class="screen" id="screen-result">
+      <div class="badge reveal-pop" id="badge">
+        <div class="halo"></div>
+        <div class="disc">
+          <div>
+            <div class="tier-cn" id="tierCn">斗者</div>
+            <div class="tier-en" id="tierEn">Fighter</div>
+          </div>
+        </div>
+      </div>
+      <div class="stars" id="stars">★★★</div>
+      <p class="power">Combat Power &nbsp; <b id="power">0</b></p>
+      <p class="flavor" id="flavor"></p>
+      <button class="btn ghost" id="againBtn">Scan Again</button>
+    </section>
+  </main>
+
+  <p class="footer">Battle Through The Heavens · 斗破苍穹 — fan-made Dou Qi scanner</p>
+
+<script>
+  // --- Cultivation tiers, low to high (斗气 progression) ---
+  const TIERS = [
+    { cn: "斗之气", en: "Qi Refining",  color: "#7CFC9A", flavor: "The first spark. Dou Qi stirs faintly within your meridians." },
+    { cn: "斗者",   en: "Fighter",      color: "#4dd0e1", flavor: "You have stepped onto the path. The road ahead is long, but yours to walk." },
+    { cn: "斗师",   en: "Master",       color: "#42a5f5", flavor: "Dou Qi flows freely now. You can leave the ground on wings of energy." },
+    { cn: "大斗师", en: "Grand Master", color: "#5c6bc0", flavor: "A pillar among cultivators. Few in a city stand at your height." },
+    { cn: "斗灵",   en: "Dou Ling",     color: "#7e57c2", flavor: "Your soul perception awakens. Energy answers your intent." },
+    { cn: "斗王",   en: "Dou Wang",     color: "#ab47bc", flavor: "A King of Dou Qi. Your name is spoken with weight across the land." },
+    { cn: "斗皇",   en: "Dou Huang",    color: "#ec407a", flavor: "Emperor-tier might. You can wound the sky and shake the earth." },
+    { cn: "斗宗",   en: "Dou Zong",     color: "#ff7043", flavor: "You can now condense your Dou Qi into wings — true flight is yours." },
+    { cn: "斗尊",   en: "Dou Zun",      color: "#ffa726", flavor: "A venerate whose gaze bends the space around you." },
+    { cn: "半圣",   en: "Half-Saint",   color: "#ffca28", flavor: "One breath from sainthood. The Dou Qi Continent trembles at your rise." },
+    { cn: "斗圣",   en: "Dou Sheng",    color: "#ff5252", flavor: "A Saint. You can seize the heavens and reshape the world with a thought." },
+    { cn: "斗帝",   en: "Dou Di",       color: "#ff1744", flavor: "The apex. Dou Di — a god among mortals. The heavens themselves bow." },
+  ];
+
+  const STATUS_MSGS = [
+    "Igniting the array",
+    "Detecting Dou Qi signature",
+    "Mapping your meridians",
+    "Measuring flame intensity",
+    "Calibrating soul perception",
+    "Compiling combat power",
+  ];
+
+  const CIRC = 2 * Math.PI * 150; // circumference of progress ring (r=150)
+
+  const screens = {
+    idle: document.getElementById("screen-idle"),
+    scan: document.getElementById("screen-scan"),
+    result: document.getElementById("screen-result"),
+  };
+
+  function show(name) {
+    Object.values(screens).forEach(s => s.classList.remove("active"));
+    screens[name].classList.add("active");
+  }
+
+  function spawnEmbers(n) {
+    const wrap = document.getElementById("embers");
+    for (let i = 0; i < n; i++) {
+      const e = document.createElement("div");
+      e.className = "ember";
+      e.style.left = Math.random() * 100 + "vw";
+      e.style.setProperty("--drift", (Math.random() * 80 - 40) + "px");
+      const dur = 6 + Math.random() * 8;
+      e.style.animationDuration = dur + "s";
+      e.style.animationDelay = (-Math.random() * dur) + "s";
+      const scale = 0.6 + Math.random() * 1.8;
+      e.style.transform = `scale(${scale})`;
+      wrap.appendChild(e);
+    }
+  }
+
+  const bar = document.getElementById("progressBar");
+  const pctEl = document.getElementById("pct");
+  const statusEl = document.getElementById("status");
+  bar.style.strokeDasharray = CIRC;
+
+  function setProgress(p) {
+    bar.style.strokeDashoffset = CIRC * (1 - p / 100);
+    pctEl.textContent = Math.round(p) + "%";
+  }
+
+  function runScan() {
+    show("scan");
+    setProgress(0);
+    let p = 0;
+    let msgIndex = 0;
+    statusEl.innerHTML = STATUS_MSGS[0] + '<span class="dots"></span>';
+
+    const statusTimer = setInterval(() => {
+      msgIndex = (msgIndex + 1) % STATUS_MSGS.length;
+      statusEl.innerHTML = STATUS_MSGS[msgIndex] + '<span class="dots"></span>';
+    }, 900);
+
+    const tick = () => {
+      // Ease toward 100 with a little randomness so it feels alive
+      const step = Math.max(0.6, (100 - p) * 0.04) + Math.random() * 1.5;
+      p = Math.min(100, p + step);
+      setProgress(p);
+      if (p < 100) {
+        setTimeout(tick, 60 + Math.random() * 40);
+      } else {
+        clearInterval(statusTimer);
+        statusEl.textContent = "Reading complete";
+        setTimeout(revealResult, 650);
+      }
+    };
+    tick();
+  }
+
+  function weightedTierIndex() {
+    // Bias toward lower/mid tiers; higher tiers are rare.
+    const r = Math.random();
+    const eased = Math.pow(r, 2.2);            // skew toward 0
+    return Math.floor(eased * TIERS.length);
+  }
+
+  function revealResult() {
+    const idx = weightedTierIndex();
+    const tier = TIERS[idx];
+    const stars = 1 + Math.floor(Math.random() * 9);
+    // Combat power scales with tier index and star level.
+    const base = Math.pow(6, idx) * 120;
+    const power = Math.round(base * (1 + stars / 9) * (0.85 + Math.random() * 0.3));
+
+    document.documentElement.style.setProperty("--tier", tier.color);
+    document.getElementById("tierCn").textContent = tier.cn;
+    document.getElementById("tierEn").textContent = tier.en;
+    document.getElementById("stars").textContent = "★".repeat(stars) + "☆".repeat(9 - stars);
+    document.getElementById("power").textContent = power.toLocaleString();
+    document.getElementById("flavor").textContent = tier.flavor;
+
+    const badge = document.getElementById("badge");
+    badge.classList.remove("reveal-pop");
+    void badge.offsetWidth; // restart animation
+    badge.classList.add("reveal-pop");
+
+    show("result");
+  }
+
+  document.getElementById("startBtn").addEventListener("click", runScan);
+  document.getElementById("againBtn").addEventListener("click", runScan);
+
+  spawnEmbers(40);
+</script>
+</body>
+</html>
