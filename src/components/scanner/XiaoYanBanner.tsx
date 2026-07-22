@@ -30,14 +30,14 @@ export function XiaoYanBanner() {
       <div className="relative">
         <div className="mb-2 text-4xl">🐉</div>
         <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold">
-          Exclusive Achievement Unlocked
+          Pencapaian Eksklusif Terbuka
         </p>
         <h3 className="mt-2 font-display text-2xl font-black tracking-tight text-white sm:text-3xl">
-          Destined Successor of Xiao Yan
+          Penerus Takdir Xiao Yan
         </h3>
         <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-slate-300">
-          A golden dragon aura coils around your soul. The heavens themselves
-          recognise you as an heir to the Flame Emperor — a legend in the making.
+          Aura naga emas melingkari jiwamu. Langit sendiri mengakuimu sebagai
+          pewaris Sang Kaisar Api — sebuah legenda yang sedang lahir.
         </p>
       </div>
     </motion.div>

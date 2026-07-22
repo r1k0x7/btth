@@ -14,7 +14,7 @@ import "./globals.css";
 const SITE_URL = "https://dou-qi-realm-scanner.vercel.app";
 const TITLE = "Dou Qi Realm Scanner — Battle Through the Heavens";
 const DESCRIPTION =
-  "Discover your destiny in the world of Battle Through the Heavens. Scan your cultivation realm, talent, Dou Qi attribute and Heavenly Flame.";
+  "Temukan takdirmu di dunia Battle Through the Heavens. Pindai alam kultivasi, bakat, atribut Dou Qi, dan Api Surgawimu.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -61,7 +61,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="id">
       <body className="min-h-screen font-sans">
         <Atmosphere />
         <Navbar />

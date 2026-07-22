@@ -42,17 +42,17 @@ export function Hero() {
             variants={item}
             className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300"
           >
-            Discover your destiny in the world of Battle Through the Heavens.
-            Enter your name, ignite the array, and let the flame reveal your
-            cultivation realm, talent, and Heavenly Flame.
+            Temukan takdirmu di dunia Battle Through the Heavens. Masukkan
+            namamu, nyalakan array spiritual, dan biarkan api mengungkap alam
+            kultivasi, bakat, serta Api Surgawimu.
           </motion.p>
 
           <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">
             <Link href="#scanner">
-              <GlowButton>Scan My Cultivation</GlowButton>
+              <GlowButton>Pindai Kultivasiku</GlowButton>
             </Link>
             <Link href="/heavenly-flames">
-              <GlowButton variant="ghost">Explore Heavenly Flames</GlowButton>
+              <GlowButton variant="ghost">Jelajahi Api Surgawi</GlowButton>
             </Link>
           </motion.div>
 
@@ -62,15 +62,15 @@ export function Hero() {
           >
             <div>
               <div className="font-display text-2xl font-bold text-white">12</div>
-              Cultivation Realms
+              Alam Kultivasi
             </div>
             <div>
               <div className="font-display text-2xl font-bold text-white">23</div>
-              Heavenly Flames
+              Api Surgawi
             </div>
             <div>
               <div className="font-display text-2xl font-bold text-white">∞</div>
-              Destinies to Forge
+              Takdir untuk Ditempa
             </div>
           </motion.div>
         </motion.div>

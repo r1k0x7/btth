@@ -12,9 +12,9 @@ export function TopCultivators() {
     <section id="cultivators" className="relative scroll-mt-24 py-20 sm:py-28">
       <div className="container-page">
         <SectionHeading
-          eyebrow="Hall of Legends"
-          title="Top Cultivators"
-          subtitle="The mightiest beings ever to walk the Dou Qi Continent, ranked by the sheer weight of their power."
+          eyebrow="Aula Para Legenda"
+          title="Kultivator Teratas"
+          subtitle="Sosok-sosok terkuat yang pernah menapaki Benua Dou Qi, diperingkat berdasarkan bobot kekuatan mereka."
         />
 
         <div className="mx-auto mt-14 max-w-3xl space-y-3">
@@ -49,7 +49,7 @@ export function TopCultivators() {
                   {formatNumber(c.power)}
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
-                  Power
+                  Kekuatan
                 </div>
               </div>
             </motion.div>

@@ -9,9 +9,9 @@ export function RealmLadder() {
     <section id="realms" className="relative scroll-mt-24 py-20 sm:py-28">
       <div className="container-page">
         <SectionHeading
-          eyebrow="The Path of Dou Qi"
-          title="Cultivation Realms"
-          subtitle="Twelve realms stand between a mortal's first breath of Dou Qi and the throne of the Dou Di. Each is a world of its own."
+          eyebrow="Jalan Dou Qi"
+          title="Alam Kultivasi"
+          subtitle="Dua belas alam berdiri di antara napas pertama Dou Qi seorang manusia fana dan takhta Dou Di. Masing-masing adalah dunia tersendiri."
         />
 
         <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -48,10 +48,10 @@ export function RealmLadder() {
               </p>
               <p className="mt-3 text-[11px] uppercase tracking-[0.18em] text-slate-500">
                 {realm.levelType === "level"
-                  ? "Levels 1–10"
+                  ? "Tingkat 1–10"
                   : realm.levelType === "star"
-                    ? "1–9 Stars"
-                    : "Peak Realm"}
+                    ? "1–9 Bintang"
+                    : "Alam Puncak"}
               </p>
             </motion.div>
           ))}

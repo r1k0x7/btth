@@ -3,7 +3,12 @@
 import { motion, type Variants } from "framer-motion";
 import { formatRealmLevel } from "@/lib/realms";
 import type { ScanResult } from "@/lib/types";
-import { ATTRIBUTE_META, cn } from "@/lib/utils";
+import {
+  ATTRIBUTE_META,
+  cn,
+  POTENTIAL_LABELS,
+  SOUL_REALM_LABELS,
+} from "@/lib/utils";
 import { HeavenlyFlameCard } from "./HeavenlyFlameCard";
 import { LegendaryFlash } from "./LegendaryFlash";
 import { ShareActions } from "./ShareActions";
@@ -37,7 +42,7 @@ export function ResultReveal({
         {/* Cultivator + realm */}
         <motion.div custom={0} variants={reveal} className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
-            Cultivator
+            Kultivator
           </p>
           <h3 className="mt-1 font-display text-2xl font-bold text-white sm:text-3xl">
             {result.name}
@@ -83,12 +88,20 @@ export function ResultReveal({
         {/* Attribute / Soul / Potential */}
         <motion.div custom={1} variants={reveal} className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <InfoTile
-            label="Dou Qi Attribute"
-            value={`${attr.icon} ${result.attribute}`}
+            label="Atribut Dou Qi"
+            value={`${attr.icon} ${attr.label}`}
             color={attr.color}
           />
-          <InfoTile label="Soul Realm" value={result.soulRealm} color="#38BDF8" />
-          <InfoTile label="Potential" value={result.potential} color="#8B5CF6" />
+          <InfoTile
+            label="Alam Jiwa"
+            value={SOUL_REALM_LABELS[result.soulRealm]}
+            color="#38BDF8"
+          />
+          <InfoTile
+            label="Potensi"
+            value={POTENTIAL_LABELS[result.potential]}
+            color="#8B5CF6"
+          />
         </motion.div>
 
         {/* Talent */}
@@ -103,7 +116,7 @@ export function ResultReveal({
           className="rounded-2xl border-l-2 border-gold/60 bg-white/[0.03] p-5"
         >
           <p className="mb-1 text-xs uppercase tracking-[0.25em] text-gold">
-            Fate Reading
+            Bacaan Takdir
           </p>
           <p className="text-sm italic leading-relaxed text-slate-300">
             {result.fate}
@@ -125,15 +138,15 @@ export function ResultReveal({
                 <span className="h-px w-10 bg-gold/40" />
                 <p className="text-center text-sm font-semibold uppercase tracking-[0.25em] text-gold">
                   {result.isDualFlame
-                    ? "Dual Heavenly Flame Fusion"
-                    : "Heavenly Flame Obtained"}
+                    ? "Fusi Ganda Api Surgawi"
+                    : "Api Surgawi Diperoleh"}
                 </p>
                 <span className="h-px w-10 bg-gold/40" />
               </div>
               {result.isDualFlame && (
                 <p className="text-center text-xs text-slate-400">
-                  Your talent is so rare that two strange fires have bonded to your
-                  soul at once — their auras collide in a storm of energy.
+                  Bakatmu begitu langka hingga dua api aneh berikatan dengan jiwamu
+                  sekaligus — aura mereka berbenturan dalam badai energi.
                 </p>
               )}
               <div className={cn("grid gap-4", result.isDualFlame ? "md:grid-cols-2" : "")}>
@@ -145,8 +158,8 @@ export function ResultReveal({
           ) : (
             <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 text-center">
               <p className="text-sm text-slate-400">
-                🔥 No Heavenly Flame answered your call this time — but the strongest
-                fires are seized by those who refuse to give up. Cultivate and scan again.
+                🔥 Tak ada Api Surgawi yang menjawab panggilanmu kali ini — tetapi api
+                terkuat direbut oleh mereka yang pantang menyerah. Berkultivasilah dan pindai lagi.
               </p>
             </div>
           )}

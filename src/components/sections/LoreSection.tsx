@@ -9,9 +9,9 @@ export function LoreSection() {
     <section id="lore" className="relative scroll-mt-24 py-20 sm:py-28">
       <div className="container-page">
         <SectionHeading
-          eyebrow="Codex"
-          title="The World of Battle Through the Heavens"
-          subtitle="A primer on the forces that shape the Dou Qi Continent — for those about to forge their own legend."
+          eyebrow="Kodeks"
+          title="Dunia Battle Through the Heavens"
+          subtitle="Pengantar tentang kekuatan-kekuatan yang membentuk Benua Dou Qi — bagi mereka yang hendak menempa legenda mereka sendiri."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2">

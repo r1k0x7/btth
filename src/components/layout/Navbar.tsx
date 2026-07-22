@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { href: "/#scanner", label: "Scanner" },
-  { href: "/#realms", label: "Realms" },
-  { href: "/heavenly-flames", label: "Heavenly Flames" },
-  { href: "/#cultivators", label: "Leaderboard" },
-  { href: "/#lore", label: "Lore" },
+  { href: "/#scanner", label: "Pemindai" },
+  { href: "/#realms", label: "Alam" },
+  { href: "/heavenly-flames", label: "Api Surgawi" },
+  { href: "/#cultivators", label: "Papan Peringkat" },
+  { href: "/#lore", label: "Kisah" },
 ];
 
 export function Navbar() {
@@ -62,7 +62,7 @@ export function Navbar() {
             href="/#scanner"
             className="hidden rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-gold ring-1 ring-gold/30 transition hover:bg-gold/10 md:inline-block"
           >
-            Begin Scan
+            Mulai Pindai
           </Link>
 
           <button

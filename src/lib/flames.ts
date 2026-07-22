@@ -9,141 +9,141 @@ interface FlameSeed {
 const FLAME_SEEDS: FlameSeed[] = [
   {
     rank: 1,
-    name: "Emperor Flame",
+    name: "Api Kaisar",
     description:
-      "The sovereign of all strange fires, born from the fused will of every heavenly flame. To wield it is to hold the authority of a Dou Di in your palm.",
+      "Penguasa segala api aneh, lahir dari kehendak yang menyatu dari setiap api surgawi. Menggenggamnya berarti memegang otoritas seorang Dou Di di telapak tanganmu.",
   },
   {
     rank: 2,
-    name: "Void Devouring Flame",
+    name: "Api Penelan Kehampaan",
     description:
-      "A ravenous flame that swallows other fires to grow ever stronger, said to be able to consume the heavens themselves.",
+      "Api rakus yang melahap api lain agar terus menguat, konon mampu menelan langit itu sendiri.",
   },
   {
     rank: 3,
-    name: "Purifying Demonic Lotus Flame",
+    name: "Api Teratai Iblis Penyucian",
     description:
-      "A serene lotus of fire that cleanses all impurity, its calm surface hiding a temperature that unmakes matter.",
+      "Teratai api yang tenang dan menyucikan segala kotoran; permukaannya yang damai menyembunyikan suhu yang mampu memusnahkan materi.",
   },
   {
     rank: 4,
-    name: "Golden Emperor Incinerating Heavenly Flame",
+    name: "Api Surgawi Pembakar Kaisar Emas",
     description:
-      "A regal golden blaze whose incineration leaves nothing behind — not ash, not memory, not even echoes in the void.",
+      "Kobaran emas nan megah yang pembakarannya tak menyisakan apa pun — bukan abu, bukan kenangan, bahkan gema di kehampaan pun tiada.",
   },
   {
     rank: 5,
-    name: "Flame of Life",
+    name: "Api Kehidupan",
     description:
-      "The paradox fire that grants vitality as readily as it takes it, capable of rekindling life from the edge of death.",
+      "Api paradoks yang memberi vitalitas semudah ia merenggutnya, mampu menyalakan kembali nyawa dari ambang kematian.",
   },
   {
     rank: 6,
-    name: "Eight Desolations Destruction Flame",
+    name: "Api Penghancur Delapan Kehampaan",
     description:
-      "A cataclysmic fire that lays waste to the eight directions, feared as a harbinger of ruin across the continent.",
+      "Api dahsyat yang meluluhlantakkan delapan penjuru, ditakuti sebagai pertanda kehancuran di seluruh benua.",
   },
   {
     rank: 7,
-    name: "Nine Serenities Golden Ancestral Flame",
+    name: "Api Leluhur Emas Sembilan Keheningan",
     description:
-      "An ancestral gold flame drawn from the nine serene abysses, revered by beast clans as a primordial inheritance.",
+      "Api emas leluhur yang ditarik dari sembilan jurang hening, dipuja klan-klan buas sebagai warisan purba.",
   },
   {
     rank: 8,
-    name: "Red Lotus Karma Flame",
+    name: "Api Karma Teratai Merah",
     description:
-      "A karmic blaze that burns away sin and fate alike; those it touches are severed from the cycle of cause and effect.",
+      "Kobaran karma yang membakar dosa sekaligus takdir; siapa pun yang tersentuh terputus dari lingkaran sebab-akibat.",
   },
   {
     rank: 9,
-    name: "Three Thousand Burning Flame",
+    name: "Api Membakar Tiga Ribu",
     description:
-      "A flame that blossoms into three thousand tongues of fire, each one hot enough to scorch a mountain range.",
+      "Api yang merekah menjadi tiga ribu lidah api, masing-masing cukup panas untuk menghanguskan barisan pegunungan.",
   },
   {
     rank: 10,
-    name: "Nine Nether Wind Flame",
+    name: "Api Angin Sembilan Neraka",
     description:
-      "A ghostly azure fire riding the winds of the nine nether realms, chilling and burning in the very same breath.",
+      "Api biru pucat bak hantu yang menunggangi angin sembilan alam neraka, membekukan dan membakar dalam satu embusan yang sama.",
   },
   {
     rank: 11,
-    name: "Bone Chilling Flame",
+    name: "Api Pembeku Tulang",
     description:
-      "A pale flame colder than ice, freezing the marrow of any who draw near before its heat consumes them.",
+      "Api pucat yang lebih dingin dari es, membekukan sumsum siapa pun yang mendekat sebelum panasnya melahap mereka.",
   },
   {
     rank: 12,
-    name: "Nine Dragon Lightning Flame",
+    name: "Api Petir Sembilan Naga",
     description:
-      "Nine coiling dragons of fire and thunder, their roar splitting the sky with arcs of blinding lightning.",
+      "Sembilan naga api dan guntur yang melingkar, raungannya membelah langit dengan busur petir yang menyilaukan.",
   },
   {
     rank: 13,
-    name: "Turtle Spiritual Earth Flame",
+    name: "Api Tanah Spiritual Kura-Kura",
     description:
-      "An ancient earthen flame guarded within a spirit turtle's shell, patient and enduring as the bedrock itself.",
+      "Api tanah kuno yang dijaga dalam tempurung kura-kura roh, sabar dan tahan lama bagai batuan dasar itu sendiri.",
   },
   {
     rank: 14,
-    name: "Fallen Heart Flame",
+    name: "Api Hati Jatuh",
     description:
-      "A volcanic flame hidden beneath the Jia Ma Empire, the very fire that once tempered a young Xiao Yan's resolve.",
+      "Api vulkanik yang tersembunyi di bawah Kekaisaran Jia Ma, api yang dulu menempa tekad Xiao Yan muda.",
   },
   {
     rank: 15,
-    name: "Sea Heart Flame",
+    name: "Api Hati Samudra",
     description:
-      "A deep-sea blaze that burns beneath the waves without ever being quenched, cherished by aquatic clans.",
+      "Kobaran laut dalam yang menyala di bawah ombak tanpa pernah padam, disayangi klan-klan akuatik.",
   },
   {
     rank: 16,
-    name: "Fire Cloud Water Flame",
+    name: "Api Air Awan Api",
     description:
-      "A flame of paradox that drifts like cloud and flows like water, elusive and endlessly adaptive.",
+      "Api paradoks yang melayang bagai awan dan mengalir bagai air, sulit ditangkap dan tanpa henti menyesuaikan diri.",
   },
   {
     rank: 17,
-    name: "Volcanic Stone Flame",
+    name: "Api Batu Vulkanik",
     description:
-      "A molten fire slumbering in the heart of dead volcanoes, erupting with the fury of the earth's core.",
+      "Api cair yang tertidur di jantung gunung berapi mati, meletus dengan amarah inti bumi.",
   },
   {
     rank: 18,
-    name: "Wind and Thunder Illusion Flame",
+    name: "Api Ilusi Angin dan Guntur",
     description:
-      "A trickster's flame woven from wind and thunder, cloaking its wielder in storms of shifting illusion.",
+      "Api penipu yang ditenun dari angin dan guntur, menyelubungi penggunanya dalam badai ilusi yang terus berubah.",
   },
   {
     rank: 19,
-    name: "Green Lotus Core Flame",
+    name: "Api Inti Teratai Hijau",
     description:
-      "A jade-green lotus fire born in the earth's core, the treasured flame that anchored Xiao Yan's early ascent.",
+      "Api teratai hijau giok yang lahir di inti bumi, api berharga yang menopang pendakian awal Xiao Yan.",
   },
   {
     rank: 20,
-    name: "Dragon Phoenix Flame",
+    name: "Api Naga Phoenix",
     description:
-      "Twin spirits of dragon and phoenix entwined in flame, a rare fire coveted by both royal beast bloodlines.",
+      "Dua roh naga dan phoenix yang terjalin dalam api, api langka yang diperebutkan kedua garis darah hewan kerajaan.",
   },
   {
     rank: 21,
-    name: "Six Dao Reincarnation Flame",
+    name: "Api Reinkarnasi Enam Jalan",
     description:
-      "A cyclic fire echoing the six paths of reincarnation, its flames turning like a slow and solemn wheel.",
+      "Api siklus yang menggemakan enam jalan reinkarnasi, kobarannya berputar bagai roda yang lambat dan khidmat.",
   },
   {
     rank: 22,
-    name: "Myriad Beast Flame",
+    name: "Api Seribu Buas",
     description:
-      "A wild flame that takes the shape of countless beasts, howling with the untamed spirit of the wilderness.",
+      "Api liar yang menjelma dalam wujud beragam hewan, melolong dengan semangat rimba yang tak terjinakkan.",
   },
   {
     rank: 23,
-    name: "Mystic Yellow Flame",
+    name: "Api Kuning Mistis",
     description:
-      "A humble amber fire and a common entry on the flame rankings — yet still a treasure beyond mortal reach.",
+      "Api kuning kekuningan yang sederhana dan entri umum di peringkat api — namun tetap harta di luar jangkauan manusia fana.",
   },
 ];
 
@@ -185,6 +185,14 @@ export const RARITY_COLORS: Record<Rarity, string> = {
   Epic: "#8B5CF6",
   Rare: "#38BDF8",
   Uncommon: "#7CFC9A",
+};
+
+export const RARITY_LABELS: Record<Rarity, string> = {
+  Mythic: "Mistis",
+  Legendary: "Legendaris",
+  Epic: "Epik",
+  Rare: "Langka",
+  Uncommon: "Tidak Umum",
 };
 
 export function flameByRank(rank: number): HeavenlyFlame | undefined {
